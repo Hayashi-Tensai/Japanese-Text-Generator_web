@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>すきな食べ物</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 2em auto; line-height: 1.8; }
+    .title-container { display: flex; align-items: center; gap: 0.5em; }
+    .title-container h1 { margin: 0; }
+    .audio-btn-title { background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0.2em 0.5em; opacity: 0.6; transition: opacity 0.2s; }
+    .audio-btn-title:hover { opacity: 1; }
+    .content { font-size: 1.2em; margin: 2em 0; padding: 1em; }
+    .audio-btn-inline { background: none; border: none; cursor: pointer; font-size: 0.7em; padding: 0 0.2em; margin: 0 0.3em; opacity: 0.5; transition: opacity 0.2s; }
+    .audio-btn-inline:hover { opacity: 1; }
+    ruby { color: #333; }
+    rt { font-size: 0.7em; color: #666; }
+    .vocab { margin-top: 2em; }
+  </style>
+  <script>
+    function playAudio(text) {
+      // Use Web Speech API for text-to-speech
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';  // Set language to Japanese
+        utterance.rate = 0.8;       // Slightly slower speech for clarity
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Text-to-Speech not supported in this browser');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="title-container">
+    <h1>すきな食べ物</h1>
+    <button class="audio-btn-title" onclick="playAudio('佐藤さんは 魚が 好きな 人です。 でも、肉は 好きじゃないです。 山本さんは 肉が 好きです。 魚も 好きです。 田中さんは 野菜が 好きじゃない 人でした。 でも、いまは 好きです。 すこし へんかです。')" title="Read entire text">🔊</button>
+  </div>
+
+  <div class="content">
+    <ruby>佐藤<rt>さとう</rt></ruby>さんは<ruby>魚<rt>さかな</rt></ruby>が<ruby>好き<rt>すき</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('佐藤さんは 魚が 好きな 人です。')" title="Listen">🔉</button> でも、<ruby>肉<rt>にく</rt></ruby>は<ruby>好き<rt>すき</rt></ruby>じゃないです。<button class="audio-btn-inline" onclick="playAudio('でも、肉は 好きじゃないです。')" title="Listen">🔉</button> <ruby>山本<rt>やまもと</rt></ruby>さんは<ruby>肉<rt>にく</rt></ruby>が<ruby>好き<rt>すき</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('山本さんは 肉が 好きです。')" title="Listen">🔉</button> <ruby>魚<rt>さかな</rt></ruby>も<ruby>好き<rt>すき</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('魚も 好きです。')" title="Listen">🔉</button> <ruby>田中<rt>たなか</rt></ruby>さんは<ruby>野菜<rt>やさい</rt></ruby>が<ruby>好き<rt>すき</rt></ruby>じゃない<ruby>人<rt>ひと</rt></ruby>でした。<button class="audio-btn-inline" onclick="playAudio('田中さんは 野菜が 好きじゃない 人でした。')" title="Listen">🔉</button> でも、いまは<ruby>好き<rt>すき</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('でも、いまは 好きです。')" title="Listen">🔉</button> すこしへんかです。<button class="audio-btn-inline" onclick="playAudio('すこし へんかです。')" title="Listen">🔉</button> 
+  </div>
+
+  <hr>
+
+  <div class="vocab">
+    <h2>Vocabulary</h2>
+    <ul>
+      <li>魚 – fish</li>
+<li>好き – like</li>
+<li>肉 – meat</li>
+<li>無い – not exist</li>
+<li>野菜 – vegetable</li>
+<li>少し – a little</li>
+    </ul>
+  </div>
+</body>
+</html>

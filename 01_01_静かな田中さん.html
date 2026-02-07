@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>静かな田中さん</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 2em auto; line-height: 1.8; }
+    .title-container { display: flex; align-items: center; gap: 0.5em; }
+    .title-container h1 { margin: 0; }
+    .audio-btn-title { background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0.2em 0.5em; opacity: 0.6; transition: opacity 0.2s; }
+    .audio-btn-title:hover { opacity: 1; }
+    .content { font-size: 1.2em; margin: 2em 0; padding: 1em; }
+    .audio-btn-inline { background: none; border: none; cursor: pointer; font-size: 0.7em; padding: 0 0.2em; margin: 0 0.3em; opacity: 0.5; transition: opacity 0.2s; }
+    .audio-btn-inline:hover { opacity: 1; }
+    ruby { color: #333; }
+    rt { font-size: 0.7em; color: #666; }
+    .vocab { margin-top: 2em; }
+  </style>
+  <script>
+    function playAudio(text) {
+      // Use Web Speech API for text-to-speech
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';  // Set language to Japanese
+        utterance.rate = 0.8;       // Slightly slower speech for clarity
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Text-to-Speech not supported in this browser');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="title-container">
+    <h1>静かな田中さん</h1>
+    <button class="audio-btn-title" onclick="playAudio('田中さんは 静かな 学生です。 あまり 話しません。 山本さんは 賑やかな 学生です。 よく 話します。 木村先生は 親切な 先生です。 しずかな 人も、賑やかな 人も、だいじです と いいます。 いい クラスです。')" title="Read entire text">🔊</button>
+  </div>
+
+  <div class="content">
+    <ruby>田中<rt>たなか</rt></ruby>さんは<ruby>静か<rt>しずか</rt></ruby>な<ruby>学生<rt>がくせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('田中さんは 静かな 学生です。')" title="Listen">🔉</button> あまり<ruby>話し<rt>はなし</rt></ruby>ません。<button class="audio-btn-inline" onclick="playAudio('あまり 話しません。')" title="Listen">🔉</button> <ruby>山本<rt>やまもと</rt></ruby>さんは<ruby>賑やか<rt>にぎやか</rt></ruby>な<ruby>学生<rt>がくせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('山本さんは 賑やかな 学生です。')" title="Listen">🔉</button> よく<ruby>話し<rt>はなし</rt></ruby>ます。<button class="audio-btn-inline" onclick="playAudio('よく 話します。')" title="Listen">🔉</button> <ruby>木村<rt>きむら</rt></ruby><ruby>先生<rt>せんせい</rt></ruby>は<ruby>親切<rt>しんせつ</rt></ruby>な<ruby>先生<rt>せんせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('木村先生は 親切な 先生です。')" title="Listen">🔉</button> しずかな<ruby>人<rt>ひと</rt></ruby>も、<ruby>賑やか<rt>にぎやか</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>も、だいじですといいます。<button class="audio-btn-inline" onclick="playAudio('しずかな 人も、賑やかな 人も、だいじです と いいます。')" title="Listen">🔉</button> いいクラスです。<button class="audio-btn-inline" onclick="playAudio('いい クラスです。')" title="Listen">🔉</button> 
+  </div>
+
+  <hr>
+
+  <div class="vocab">
+    <h2>Vocabulary</h2>
+    <ul>
+      <li>静か – quiet</li>
+<li>学生 – student</li>
+<li>話す – to speak</li>
+<li>賑やか – lively</li>
+<li>先生 – teacher</li>
+<li>親切 – kind</li>
+<li>人 – person</li>
+<li>大事 – important</li>
+<li>言う – to say</li>
+    </ul>
+  </div>
+</body>
+</html>
