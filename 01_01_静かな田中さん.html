@@ -5,7 +5,10 @@
   <title>静かな田中さん</title>
   <style>
     body { font-family: sans-serif; max-width: 800px; margin: 2em auto; line-height: 1.8; }
-    .title-container { display: flex; align-items: center; gap: 0.5em; }
+    .header { display: flex; align-items: center; gap: 1em; margin-bottom: 1em; }
+    .back-btn { background: none; border: none; cursor: pointer; font-size: 1.5em; padding: 0.5em; opacity: 0.7; transition: opacity 0.2s; text-decoration: none; color: #0066cc; }
+    .back-btn:hover { opacity: 1; }
+    .title-container { display: flex; align-items: center; gap: 0.5em; flex: 1; }
     .title-container h1 { margin: 0; }
     .audio-btn-title { background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0.2em 0.5em; opacity: 0.6; transition: opacity 0.2s; }
     .audio-btn-title:hover { opacity: 1; }
@@ -34,9 +37,12 @@
   </script>
 </head>
 <body>
-  <div class="title-container">
-    <h1>静かな田中さん</h1>
-    <button class="audio-btn-title" onclick="playAudio('田中さんは 静かな 学生です。 あまり 話しません。 山本さんは 賑やかな 学生です。 よく 話します。 木村先生は 親切な 先生です。 しずかな 人も、賑やかな 人も、だいじです と いいます。 いい クラスです。')" title="Read entire text">🔊</button>
+  <div class="header">
+    <a href="index.html" class="back-btn" title="Back to lessons">←</a>
+    <div class="title-container">
+      <h1>静かな田中さん</h1>
+      <button class="audio-btn-title" onclick="playAudio('田中さんは 静かな 学生です。 あまり 話しません。 山本さんは 賑やかな 学生です。 よく 話します。 木村先生は 親切な 先生です。 しずかな 人も、賑やかな 人も、だいじです と いいます。 いい クラスです。')" title="Read entire text">🔊</button>
+    </div>
   </div>
 
   <div class="content">
