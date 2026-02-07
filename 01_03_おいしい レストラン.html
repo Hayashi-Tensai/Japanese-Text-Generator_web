@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>静かな田中さん</title>
+  <title>おいしい レストラン</title>
   <style>
     body { font-family: sans-serif; max-width: 800px; margin: 2em auto; line-height: 1.8; }
     .header { display: flex; align-items: center; gap: 1em; margin-bottom: 1em; }
@@ -61,7 +61,7 @@
         if (pauseTimeout) clearTimeout(pauseTimeout);
         
         // First, play the title
-        const titleUtterance = new SpeechSynthesisUtterance('静かな田中さん');
+        const titleUtterance = new SpeechSynthesisUtterance('おいしい レストラン');
         titleUtterance.lang = 'ja-JP';
         titleUtterance.rate = 0.8;
         
@@ -72,7 +72,7 @@
         titleUtterance.onend = function() {
           // After title ends, wait 1 second then play content
           pauseTimeout = setTimeout(function() {
-            const contentUtterance = new SpeechSynthesisUtterance('田中さんは 静かな 学生です。 あまり 話しません。 山本さんは 賑やかな 学生です。 よく 話します。 木村先生は 親切な 先生です。 しずかな 人も、賑やかな 人も、だいじです と いいます。 いい クラスです。');
+            const contentUtterance = new SpeechSynthesisUtterance('学校の ちかくに レストランが あります。 その レストランは 値段が 高い レストランです。 でも、とても おいしいです。 山本さんは 高い レストランが あまり 好きじゃないです。 田中さんは だいすきです。 きのう、みんなで 行きました。 とても よかったです。');
             contentUtterance.lang = 'ja-JP';
             contentUtterance.rate = 0.8;
             
@@ -120,7 +120,7 @@
   <div class="header">
     <a href="index.html" class="back-btn" title="Back to lessons">←</a>
     <div class="title-container">
-      <h1>静かな田中さん</h1>
+      <h1>おいしい レストラン</h1>
       <div class="audio-controls">
         <button class="audio-btn-title" onclick="playAudioWithTitlePause()" title="Read entire text">🔊</button>
         <button id="pausePlayBtn" class="pause-play-btn" onclick="togglePause()" title="Pause/Resume">⏸</button>
@@ -129,7 +129,7 @@
   </div>
 
   <div class="content">
-    <ruby>田中<rt>たなか</rt></ruby>さんは<ruby>静か<rt>しずか</rt></ruby>な<ruby>学生<rt>がくせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('田中さんは 静かな 学生です。')" title="Listen">🔉</button> あまり<ruby>話し<rt>はなし</rt></ruby>ません。<button class="audio-btn-inline" onclick="playAudio('あまり 話しません。')" title="Listen">🔉</button> <ruby>山本<rt>やまもと</rt></ruby>さんは<ruby>賑やか<rt>にぎやか</rt></ruby>な<ruby>学生<rt>がくせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('山本さんは 賑やかな 学生です。')" title="Listen">🔉</button> よく<ruby>話し<rt>はなし</rt></ruby>ます。<button class="audio-btn-inline" onclick="playAudio('よく 話します。')" title="Listen">🔉</button> <ruby>木村<rt>きむら</rt></ruby><ruby>先生<rt>せんせい</rt></ruby>は<ruby>親切<rt>しんせつ</rt></ruby>な<ruby>先生<rt>せんせい</rt></ruby>です。<button class="audio-btn-inline" onclick="playAudio('木村先生は 親切な 先生です。')" title="Listen">🔉</button> しずかな<ruby>人<rt>ひと</rt></ruby>も、<ruby>賑やか<rt>にぎやか</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>も、だいじですといいます。<button class="audio-btn-inline" onclick="playAudio('しずかな 人も、賑やかな 人も、だいじです と いいます。')" title="Listen">🔉</button> いいクラスです。<button class="audio-btn-inline" onclick="playAudio('いい クラスです。')" title="Listen">🔉</button> 
+    <ruby>学校<rt>がっこう</rt></ruby>のちかくにレストランがあります。<button class="audio-btn-inline" onclick="playAudio('学校の ちかくに レストランが あります。')" title="Listen">🔉</button> そのレストランは<ruby>値段<rt>ねだん</rt></ruby>が<ruby>高い<rt>たかい</rt></ruby>レストランです。<button class="audio-btn-inline" onclick="playAudio('その レストランは 値段が 高い レストランです。')" title="Listen">🔉</button> でも、とてもおいしいです。<button class="audio-btn-inline" onclick="playAudio('でも、とても おいしいです。')" title="Listen">🔉</button> <ruby>山本<rt>やまもと</rt></ruby>さんは<ruby>高い<rt>たかい</rt></ruby>レストランがあまり<ruby>好き<rt>すき</rt></ruby>じゃないです。<button class="audio-btn-inline" onclick="playAudio('山本さんは 高い レストランが あまり 好きじゃないです。')" title="Listen">🔉</button> <ruby>田中<rt>たなか</rt></ruby>さんはだいすきです。<button class="audio-btn-inline" onclick="playAudio('田中さんは だいすきです。')" title="Listen">🔉</button> きのう、みんなで<ruby>行き<rt>いき</rt></ruby>ました。<button class="audio-btn-inline" onclick="playAudio('きのう、みんなで 行きました。')" title="Listen">🔉</button> とてもよかったです。<button class="audio-btn-inline" onclick="playAudio('とても よかったです。')" title="Listen">🔉</button> 
   </div>
 
   <hr>
@@ -137,19 +137,19 @@
   <div class="vocab">
     <h2>Vocabulary</h2>
     <ul>
-      <li>静か – quiet</li>
-<li>学生 – student</li>
-<li>余り – not much</li>
-<li>話す – to speak</li>
-<li>賑やか – lively</li>
-<li>良く – often</li>
-<li>先生 – teacher</li>
-<li>親切 – kind</li>
-<li>人 – person</li>
-<li>大事 – important</li>
-<li>言う – to say</li>
-<li>良い – good</li>
-<li>クラス-class – class</li>
+      <li>学校 – school</li>
+<li>近い – near</li>
+<li>レストラン-restaurant – restaurant</li>
+<li>有る – to exist</li>
+<li>其の – that</li>
+<li>値段 – price</li>
+<li>高い – expensive</li>
+<li>迚も – very</li>
+<li>美味しい – delicious</li>
+<li>大好き – love</li>
+<li>昨日 – yesterday</li>
+<li>皆 – everyone</li>
+<li>行く – to go</li>
     </ul>
   </div>
 </body>

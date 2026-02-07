@@ -10,8 +10,12 @@
     .back-btn:hover { opacity: 1; }
     .title-container { display: flex; align-items: center; gap: 0.5em; flex: 1; }
     .title-container h1 { margin: 0; }
+    .audio-controls { display: flex; align-items: center; gap: 0.3em; }
     .audio-btn-title { background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0.2em 0.5em; opacity: 0.6; transition: opacity 0.2s; }
     .audio-btn-title:hover { opacity: 1; }
+    .pause-play-btn { background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0.2em 0.5em; opacity: 0; transition: opacity 0.2s; display: none; }
+    .pause-play-btn.show { display: inline-block; opacity: 0.6; }
+    .pause-play-btn:hover { opacity: 1; }
     .content { font-size: 1.2em; margin: 2em 0; padding: 1em; }
     .audio-btn-inline { background: none; border: none; cursor: pointer; font-size: 0.7em; padding: 0 0.2em; margin: 0 0.3em; opacity: 0.5; transition: opacity 0.2s; }
     .audio-btn-inline:hover { opacity: 1; }
@@ -20,18 +24,94 @@
     .vocab { margin-top: 2em; }
   </style>
   <script>
+    let currentUtterance = null;
+    let pauseTimeout = null;
+    
     function playAudio(text) {
       // Use Web Speech API for text-to-speech
       if ('speechSynthesis' in window) {
         // Cancel any ongoing speech
         speechSynthesis.cancel();
+        if (pauseTimeout) clearTimeout(pauseTimeout);
         
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ja-JP';  // Set language to Japanese
-        utterance.rate = 0.8;       // Slightly slower speech for clarity
-        speechSynthesis.speak(utterance);
+        currentUtterance = new SpeechSynthesisUtterance(text);
+        currentUtterance.lang = 'ja-JP';  // Set language to Japanese
+        currentUtterance.rate = 0.8;       // Slightly slower speech for clarity
+        
+        // Update pause button visibility and state
+        currentUtterance.onstart = function() {
+          updatePauseButtonVisibility(true);
+        };
+        
+        currentUtterance.onend = function() {
+          updatePauseButtonVisibility(false);
+        };
+        
+        speechSynthesis.speak(currentUtterance);
       } else {
         alert('Text-to-Speech not supported in this browser');
+      }
+    }
+    
+    function playAudioWithTitlePause() {
+      // Play title, pause 1 seconds, then play content
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
+        if (pauseTimeout) clearTimeout(pauseTimeout);
+        
+        // First, play the title
+        const titleUtterance = new SpeechSynthesisUtterance('すきな食べ物');
+        titleUtterance.lang = 'ja-JP';
+        titleUtterance.rate = 0.8;
+        
+        titleUtterance.onstart = function() {
+          updatePauseButtonVisibility(true);
+        };
+        
+        titleUtterance.onend = function() {
+          // After title ends, wait 1 second then play content
+          pauseTimeout = setTimeout(function() {
+            const contentUtterance = new SpeechSynthesisUtterance('佐藤さんは 魚が 好きな 人です。 でも、肉は 好きじゃないです。 山本さんは 肉が 好きです。 魚も 好きです。 田中さんは 野菜が 好きじゃない 人でした。 でも、いまは 好きです。 すこし へんかです。');
+            contentUtterance.lang = 'ja-JP';
+            contentUtterance.rate = 0.8;
+            
+            contentUtterance.onend = function() {
+              updatePauseButtonVisibility(false);
+              currentUtterance = null;
+            };
+            
+            currentUtterance = contentUtterance;
+            speechSynthesis.speak(contentUtterance);
+          }, 1000);
+        };
+        
+        currentUtterance = titleUtterance;
+        speechSynthesis.speak(titleUtterance);
+      } else {
+        alert('Text-to-Speech not supported in this browser');
+      }
+    }
+    
+    function togglePause() {
+      if (!currentUtterance) return;
+      
+      if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+        document.getElementById('pausePlayBtn').textContent = '⏸';
+      } else {
+        speechSynthesis.pause();
+        document.getElementById('pausePlayBtn').textContent = '▶';
+      }
+    }
+    
+    function updatePauseButtonVisibility(isPlaying) {
+      const btn = document.getElementById('pausePlayBtn');
+      if (isPlaying) {
+        btn.classList.add('show');
+        btn.textContent = '⏸';
+      } else {
+        btn.classList.remove('show');
       }
     }
   </script>
@@ -41,7 +121,10 @@
     <a href="index.html" class="back-btn" title="Back to lessons">←</a>
     <div class="title-container">
       <h1>すきな食べ物</h1>
-      <button class="audio-btn-title" onclick="playAudio('佐藤さんは 魚が 好きな 人です。 でも、肉は 好きじゃないです。 山本さんは 肉が 好きです。 魚も 好きです。 田中さんは 野菜が 好きじゃない 人でした。 でも、いまは 好きです。 すこし へんかです。')" title="Read entire text">🔊</button>
+      <div class="audio-controls">
+        <button class="audio-btn-title" onclick="playAudioWithTitlePause()" title="Read entire text">🔊</button>
+        <button id="pausePlayBtn" class="pause-play-btn" onclick="togglePause()" title="Pause/Resume">⏸</button>
+      </div>
     </div>
   </div>
 
@@ -60,6 +143,7 @@
 <li>無い – not exist</li>
 <li>野菜 – vegetable</li>
 <li>少し – a little</li>
+<li>辺 – area</li>
     </ul>
   </div>
 </body>
